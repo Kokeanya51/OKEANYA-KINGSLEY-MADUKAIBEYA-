@@ -23,7 +23,7 @@
     <img src="https://placehold.co/300x200" alt="A placeholder image" width="300">
 
     <!-- Unordered List -->
-    <h3>Things I'm learning this week:</h3>
+    <h3>Things I'm learning this week:full stack web and mobile app development</h3>
     <ul>
         <li>HTML basics</li>
         <li>How to structure a webpage</li>
@@ -53,5 +53,217 @@
         <p>Made by MACOKICLINIC AND MATERNITY HOME| Auxano Institute of Technology | AUGUST 16TH, 2026</p>
     </footer>
 
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+    
+ <link rel="stylesheet" href="style.css">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboards</title>
+<style>
+  :root{
+    --ink:#1B2430;
+    --paper:#F6F4EF;
+    --card:#FFFFFF;
+    --line:#DDD8CC;
+    --academic:#5B4636;
+    --academic-accent:#C97A2B;
+    --clinic:#0E3B3A;
+    --clinic-accent:#1E7A6F;
+    --muted:#6B7280;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Georgia', 'Iowan Old Style', serif;
+    padding:32px 16px 64px;
+  }
+  .wrap{max-width:960px;margin:0 auto;}
+  .board{margin-bottom:56px;}
+  .board-header{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    border-bottom:2px solid var(--line);
+    padding-bottom:14px;
+    margin-bottom:24px;
+  }
+  .board-icon{font-size:28px;line-height:1;}
+  .board-title{
+    font-size:22px;
+    letter-spacing:0.02em;
+    margin:0;
+    font-weight:700;
+  }
+  .board-sub{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.14em;
+    color:var(--muted);
+    margin-left:auto;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+    gap:14px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:18px 20px;
+    text-decoration:none;
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    position:relative;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover, .card:focus-visible{
+    transform:translateY(-2px);
+    box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  }
+  .card:focus-visible{outline:2px solid var(--clinic-accent);outline-offset:2px;}
+
+  .card .num{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:11px;
+    color:var(--muted);
+    letter-spacing:0.08em;
+  }
+  .card .label{
+    font-size:17px;
+    font-weight:600;
+  }
+  .card .desc{
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.4;
+  }
+
+  /* Academic board accent */
+  .academic .board-icon{color:var(--academic-accent);}
+  .academic .card{border-left:4px solid var(--academic-accent);}
+  .academic .card:hover{border-color:var(--academic-accent);}
+
+  /* Clinic board accent */
+  .clinic .board-icon{color:var(--clinic-accent);}
+  .clinic .card{border-left:4px solid var(--clinic-accent);}
+  .clinic .card:hover{border-color:var(--clinic-accent);}
+  .clinic .board-title{color:var(--clinic);}
+  .academic .board-title{color:var(--academic);}
+
+  footer{
+    text-align:center;
+    font-family:'Helvetica Neue', Arial, sans-serif;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:40px;
+  }
+
+  @media (max-width:480px){
+    .board-header{flex-wrap:wrap;}
+    .board-sub{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section class="board academic">
+    <div class="board-header">
+      <span class="board-icon">🎓</span>
+      <h2 class="board-title">Student Dashboard</h2>
+      <span class="board-sub">Auxano Institute</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="#registration">
+        <span class="num">01</span>
+        <span class="label">Student Registration</span>
+        <span class="desc">Enroll and manage your student details</span>
+      </a>
+      <a class="card" href="#courses">
+        <span class="num">02</span>
+        <span class="label">Course List</span>
+        <span class="desc">Browse and select available courses</span>
+      </a>
+      <a class="card" href="#results">
+        <span class="num">03</span>
+        <span class="label">Results Checker</span>
+        <span class="desc">View grades and exam outcomes</span>
+      </a>
+      <a class="card" href="#cgpa">
+        <span class="num">04</span>
+        <span class="label">CGPA Calculator</span>
+        <span class="desc">Calculate your cumulative grade average</span>
+      </a>
+      <a class="card" href="#assignments">
+        <span class="num">05</span>
+        <span class="label">Assignment Section</span>
+        <span class="desc">Submit and track coursework</span>
+      </a>
+      <a class="card" href="#profile">
+        <span class="num">06</span>
+        <span class="label">Student Profile</span>
+        <span class="desc">View and edit your personal information</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="board clinic">
+    <div class="board-header">
+      <span class="board-icon">🏥</span>
+      <h2 class="board-title">Hospital Management Dashboard</h2>
+      <span class="board-sub">MACOKI Clinic &amp; Maternity Home</span>
+    </div>
+    <div class="grid">
+      <a class="card" href="#patient-registration">
+        <span class="num">01</span>
+        <span class="label">Patient Registration</span>
+        <span class="desc">Register new patients into the system</span>
+      </a>
+      <a class="card" href="#appointments">
+        <span class="num">02</span>
+        <span class="label">Appointments</span>
+        <span class="desc">Schedule and manage patient visits</span>
+      </a>
+      <a class="card" href="#records">
+        <span class="num">03</span>
+        <span class="label">Patient Records</span>
+        <span class="desc">Access medical history and case notes</span>
+      </a>
+      <a class="card" href="#staff">
+        <span class="num">04</span>
+        <span class="label">Doctors / Staff</span>
+        <span class="desc">Manage clinical and support staff</span>
+      </a>
+      <a class="card" href="#pharmacy">
+        <span class="num">05</span>
+        <span class="label">Pharmacy</span>
+        <span class="desc">Track medication stock and dispensing</span>
+      </a>
+      <a class="card" href="#laboratory">
+        <span class="num">06</span>
+        <span class="label">Laboratory</span>
+        <span class="desc">Manage test requests and results</span>
+      </a>
+      <a class="card" href="#billing">
+        <span class="num">07</span>
+        <span class="label">Billing</span>
+        <span class="desc">Handle invoices and payments</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>MACOKI Clinic and Maternity Home &middot; Auxano Institute of Technology</footer>
+</div>
 </body>
 </html>
