@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comfort My Soul Integrated Digital Ecosystem — MACOKI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2340;
+    --ink-mid:#2E3A63;
+    --slate:#3D4B6E;
+    --marigold:#F0A63C;
+    --marigold-shade:#C97A2B;
+    --board:#FAF6EC;
+    --board-line:#E4DCC8;
+    --white:#FFFFFF;
+    --danger:#B3402A;
+    --radius:10px;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--board);color:var(--ink);font-family:'Source Serif 4',serif;line-height:1.5;}
+  h1,h2,h3,.tile-label,nav,button{font-family:'Space Grotesk',sans-serif;}
+  a{color:inherit;}
+  header.nameplate{background:var(--ink);color:var(--board);padding:22px 20px 26px;text-align:center;border-bottom:6px solid var(--marigold);}
+  header.nameplate .kicker{letter-spacing:.14em;font-size:.7rem;text-transform:uppercase;color:var(--marigold);margin-bottom:6px;}
+  header.nameplate h1{margin:0;font-size:1.5rem;font-weight:700;letter-spacing:.01em;}
+  header.nameplate .sub{font-family:'Source Serif 4',serif;font-size:.85rem;color:#C6CBE0;margin-top:6px;}
+  .board{background:var(--ink-mid);padding:18px 14px 22px;border-bottom:1px solid var(--slate);}
+  .board-title{color:var(--board);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;opacity:.75;margin:0 4px 10px;}
+  .board-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;}
+  @media(min-width:520px){ .board-grid{grid-template-columns:repeat(3,1fr);} }
+  .tile{background:var(--marigold);color:var(--ink);border:none;border-radius:6px;padding:12px 8px;text-align:left;cursor:pointer;box-shadow:0 3px 0 var(--marigold-shade);transition:transform .08s ease;}
+  .tile:active{transform:translateY(2px);box-shadow:0 1px 0 var(--marigold-shade);}
+  .tile.is-active{background:var(--board);box-shadow:0 3px 0 var(--board-line);}
+  .tile .tile-icon{font-size:1.15rem;display:block;margin-bottom:4px;}
+  .tile .tile-label{font-size:.78rem;font-weight:600;line-height:1.2;display:block;}
+  main{padding:20px 16px 60px;max-width:720px;margin:0 auto;}
+  .panel{background:var(--white);border:1px solid var(--board-line);border-radius:var(--radius);padding:20px;margin-bottom:16px;}
+  .panel h2{margin:0 0 10px;font-size:1.15rem;color:var(--ink);}
+  .panel p{margin:0 0 10px;font-size:.95rem;color:var(--slate);}
+  .hidden{display:none;}
+  .emergency-banner{background:var(--danger);color:#fff;padding:14px 16px;border-radius:var(--radius);margin-bottom:16px;}
+  .emergency-banner p{color:#F6DED6;margin:6px 0 0;font-size:.85rem;}
+  .btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;}
+  .btn{display:inline-block;background:var(--marigold);color:var(--ink);font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:.9rem;padding:11px 16px;border-radius:8px;border:none;text-decoration:none;cursor:pointer;}
+  .btn.secondary{background:var(--ink);color:var(--board);}
+  .fine-print{font-size:.78rem;color:var(--slate);background:var(--board);border:1px dashed var(--board-line);padding:10px 12px;border-radius:8px;margin-top:14px;}
+  .abc-card{background:var(--ink);color:var(--board);border-radius:14px;padding:24px 20px;text-align:center;}
+  .abc-letter{font-size:4rem;font-weight:700;color:var(--marigold);line-height:1;}
+  .abc-emoji{font-size:2.6rem;margin:6px 0;}
+  .abc-word{font-size:1.1rem;font-weight:600;}
+  .abc-example{font-size:.85rem;color:#C6CBE0;margin-top:6px;}
+  .abc-nav{display:flex;justify-content:space-between;margin-top:16px;}
+  .abc-nav button{background:var(--marigold);border:none;color:var(--ink);font-weight:600;padding:9px 14px;border-radius:8px;font-family:'Space Grotesk',sans-serif;}
+  .abc-progress{text-align:center;font-size:.78rem;color:var(--slate);margin-top:10px;}
+  .audio-btn{margin-top:10px;background:none;border:1px solid var(--marigold);color:var(--marigold);border-radius:20px;padding:6px 14px;font-size:.8rem;font-family:'Space Grotesk',sans-serif;}
+  .coming{border:1px dashed var(--board-line);border-radius:var(--radius);padding:24px 18px;text-align:center;color:var(--slate);}
+  .coming span{display:block;font-size:1.6rem;margin-bottom:8px;}
+</style>
+</head>
+<body>
+
+<header class="nameplate">
+  <div class="kicker">Comfort My Soul Clinic · MACOKI</div>
+  <h1>Integrated Digital Ecosystem</h1>
+  <div class="sub">Healthcare · Education · Community — Afaukwu, Ikwuano LGA</div>
+</header>
+
+<nav class="board">
+  <p class="board-title">Directory</p>
+  <div class="board-grid" id="tileGrid">
+    <button class="tile is-active" data-target="dashboard"><span class="tile-icon">🏠</span><span class="tile-label">Dashboard</span></button>
+    <button class="tile" data-target="healthcare"><span class="tile-icon">🏥</span><span class="tile-label">Healthcare</span></button>
+    <button class="tile" data-target="maternity"><span class="tile-icon">🤰</span><span class="tile-label">Maternity</span></button>
+    <button class="tile" data-target="emergency"><span class="tile-icon">🚨</span><span class="tile-label">Emergency Help</span></button>
+    <button class="tile" data-target="education"><span class="tile-icon">🎓</span><span class="tile-label">Education</span></button>
+    <button class="tile" data-target="nursery"><span class="tile-icon">🔤</span><span class="tile-label">Nursery A–Z</span></button>
+    <button class="tile" data-target="cbt"><span class="tile-icon">📝</span><span class="tile-label">CBT Exam</span></button>
+    <button class="tile" data-target="library"><span class="tile-icon">📚</span><span class="tile-label">Digital Library</span></button>
+    <button class="tile" data-target="student"><span class="tile-icon">👨‍🎓</span><span class="tile-label">Student Portal</span></button>
+    <button class="tile" data-target="pharmacy"><span class="tile-icon">💊</span><span class="tile-label">Pharmacy</span></button>
+    <button class="tile" data-target="lab"><span class="tile-icon">🧪</span><span class="tile-label">Laboratory</span></button>
+    <button class="tile" data-target="results"><span class="tile-icon">📊</span><span class="tile-label">Results</span></button>
+    <button class="tile" data-target="women"><span class="tile-icon">🌸</span><span class="tile-label">Women's Health</span></button>
+    <button class="tile" data-target="admin"><span class="tile-icon">📈</span><span class="tile-label">Administration</span></button>
+    <button class="tile" data-target="profile"><span class="tile-icon">👤</span><span class="tile-label">Profile</span></button>
+    <button class="tile" data-target="settings"><span class="tile-icon">⚙️</span><span class="tile-label">Settings</span></button>
+  </div>
+</nav>
+
+<main>
+
+  <section id="dashboard" class="view">
+    <div class="panel">
+      <h2>Welcome back</h2>
+      <p>This is the unified home for clinic services, community education, and administration. Use the directory board above to move between modules.</p>
+      <p>University-track content has been removed. Education now runs Nursery → Primary → JSS 1–3 → SS 1–3 only.</p>
+    </div>
+  </section>
+
+  <section id="healthcare" class="view hidden">
+    <div class="panel"><h2>Healthcare</h2>
+      <div class="coming"><span>🏥</span>Patient accounts, professional directory, appointment requests, health Q&A and the complaint/feedback form build here next — same workflows as the MACOKI healthcare portal.</div>
+    </div>
+  </section>
+
+  <section id="maternity" class="view hidden">
+    <div class="panel"><h2>Maternity</h2>
+      <div class="coming"><span>🤰</span>Maternity and surgical service requests build here, alongside the existing appointment flow.</div>
+    </div>
+  </section>
+
+  <section id="emergency" class="view hidden">
+    <div class="emergency-banner">
+      <h2 style="margin:0;color:#fff;">🚨 Emergency Help</h2>
+      <p>If this is a medical emergency, call the clinic or your nearest emergency service immediately.</p>
+    </div>
+    <div class="panel">
+      <h2>Clinic Emergency Contact</h2>
+      <p>MACOKI Clinic & Maternity Home, Afaukwu Autonomous Community, Ikwuano LGA, Abia State.</p>
+      <div class="btn-row">
+        <a class="btn" href="tel:+2340000000000">📞 Call Clinic Now</a>
+        <button class="btn secondary" id="shareLocBtn">📍 Share My Location</button>
+      </div>
+      <p id="locResult" style="font-size:.85rem;color:var(--slate);margin-top:10px;"></p>
+      <div class="fine-print">This platform supports emergency coordination but does not replace emergency medical care. In a life-threatening situation, go to the nearest emergency facility or call your local emergency line directly.</div>
+    </div>
+  </section>
+
+  <section id="education" class="view hidden">
+    <div class="panel"><h2>Education</h2>
+      <p>Nursery, Primary, and Secondary structures live here, matching the existing NERDC-aligned curriculum work already built into the CBT engine.</p>
+      <div class="coming"><span>🎒</span>Full Primary 1–6 and JSS/SS 1–3 subject pages carry over unchanged from the current build.</div>
+    </div>
+  </section>
+
+  <section id="nursery" class="view hidden">
+    <div class="panel">
+      <h2>Nursery Alphabet Learning</h2>
+      <div class="abc-card">
+        <div class="abc-letter" id="abcLetter">A</div>
+        <div class="abc-emoji" id="abcEmoji">🍎</div>
+        <div class="abc-word" id="abcWord">Apple</div>
+        <div class="abc-example" id="abcExample">"A is for Apple. I eat a red apple."</div>
+        <button class="audio-btn" id="audioBtn">🔊 Hear it</button>
+        <div class="abc-nav">
+          <button id="prevBtn">← Previous</button>
+          <button id="nextBtn">Next →</button>
+        </div>
+      </div>
+      <p class="abc-progress" id="abcProgress">Letter 1 of 26</p>
+    </div>
+  </section>
+
+  <section id="cbt" class="view hidden">
+    <div class="panel"><h2>CBT Examination</h2>
+      <div class="coming"><span>📝</span>Existing JSS/SS CBT engine (timed exams, question navigator, bookmarking, auto-scoring, review, retake) carries over as-is.</div>
+    </div>
+  </section>
+
+  <section id="library" class="view hidden">
+    <div class="panel"><h2>Digital Library</h2><div class="coming"><span>📚</span>Builds next.</div></div>
+  </section>
+
+  <section id="student" class="view hidden">
+    <div class="panel"><h2>Student Portal</h2><div class="coming"><span>👨‍🎓</span>Builds next.</div></div>
+  </section>
+
+  <section id="pharmacy" class="view hidden">
+    <div class="panel"><h2>Pharmacy & Inventory</h2>
+      <div class="coming"><span>💊</span>Adding generic/brand name, dosage form, batch number, manufacture/expiry dates, supplier, stock movement, dispensing records, and expiry/low-stock monitoring to the existing dashboard.</div>
+    </div>
+  </section>
+
+  <section id="lab" class="view hidden">
+    <div class="panel"><h2>Laboratory</h2><div class="coming"><span>🧪</span>Laboratory booking builds here.</div></div>
+  </section>
+
+  <section id="results" class="view hidden">
+    <div class="panel"><h2>Results</h2><div class="coming"><span>📊</span>Builds next.</div></div>
+  </section>
+
+  <section id="women" class="view hidden">
+    <div class="panel"><h2>Women's & Maternal Health</h2>
+      <div class="coming"><span>🌸</span>Cycle tracker, personal calendar, fertile-window estimates, maternal health FAQs, and professional-care reminders build here.</div>
+    </div>
+  </section>
+
+  <section id="admin" class="view hidden">
+    <div class="panel"><h2>Administration</h2><div class="coming"><span>📈</span>Builds next.</div></div>
+  </section>
+
+  <section id="profile" class="view hidden">
+    <div class="panel"><h2>Profile</h2><div class="coming"><span>👤</span>Builds next.</div></div>
+  </section>
+
+  <section id="settings" class="view hidden">
+    <div class="panel"><h2>Settings</h2><div class="coming"><span>⚙️</span>Builds next.</div></div>
+  </section>
+
+</main>
+
+<script>
+function esc(str){
+  return String(str).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+document.querySelectorAll('.tile').forEach(function(tile){
+  tile.addEventListener('click', function(){
+    document.querySelectorAll('.tile').forEach(function(t){ t.classList.remove('is-active'); });
+    tile.classList.add('is-active');
+    var target = tile.getAttribute('data-target');
+    document.querySelectorAll('.view').forEach(function(v){ v.classList.add('hidden'); });
+    document.getElementById(target).classList.remove('hidden');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+document.getElementById('shareLocBtn').addEventListener('click', function(){
+  var out = document.getElementById('locResult');
+  if(!navigator.geolocation){
+    out.textContent = 'Location sharing is not supported on this device.';
+    return;
+  }
+  out.textContent = 'Getting your location…';
+  navigator.geolocation.getCurrentPosition(function(pos){
+    var lat = pos.coords.latitude.toFixed(5);
+    var lng = pos.coords.longitude.toFixed(5);
+    out.innerHTML = 'Your location: ' + esc(lat) + ', ' + esc(lng) +
+      ' — <a href="https://maps.google.com/?q=' + esc(lat) + ',' + esc(lng) + '" target="_blank" rel="noopener">open in Maps</a>. Read this out or share the link with the clinic.';
+  }, function(){
+    out.textContent = 'Could not get your location. Please describe your location by phone instead.';
+  });
+});
+
+var alphabet = [
+  {l:'A',e:'🍎',w:'Apple',x:'A is for Apple. I eat a red apple.'},
+  {l:'B',e:'⚽',w:'Ball',x:'B is for Ball. I play with the ball.'},
+  {l:'C',e:'🐱',w:'Cat',x:'C is for Cat. The cat says meow.'},
+  {l:'D',e:'🐶',w:'Dog',x:'D is for Dog. The dog barks.'},
+  {l:'E',e:'🥚',w:'Egg',x:'E is for Egg. I eat egg for breakfast.'},
+  {l:'F',e:'🐟',w:'Fish',x:'F is for Fish. The fish swims in water.'},
+  {l:'G',e:'🍇',w:'Grapes',x:'G is for Grapes. Grapes are sweet.'},
+  {l:'H',e:'🏠',w:'House',x:'H is for House. I live in a house.'},
+  {l:'I',e:'🍦',w:'Ice cream',x:'I is for Ice cream. Ice cream is cold.'},
+  {l:'J',e:'🍯',w:'Jam',x:'J is for Jam. I put jam on bread.'},
+  {l:'K',e:'🔑',w:'Key',x:'K is for Key. The key opens the door.'},
+  {l:'L',e:'🦁',w:'Lion',x:'L is for Lion. The lion is strong.'},
+  {l:'M',e:'🥭',w:'Mango',x:'M is for Mango. Mango is a fruit.'},
+  {l:'N',e:'👃',w:'Nose',x:'N is for Nose. I smell with my nose.'},
+  {l:'O',e:'🍊',w:'Orange',x:'O is for Orange. Orange is a fruit.'},
+  {l:'P',e:'🐷',w:'Pig',x:'P is for Pig. The pig says oink.'},
+  {l:'Q',e:'👸',w:'Queen',x:'Q is for Queen. The queen wears a crown.'},
+  {l:'R',e:'🌈',w:'Rainbow',x:'R is for Rainbow. The rainbow has many colours.'},
+  {l:'S',e:'☀️',w:'Sun',x:'S is for Sun. The sun gives us light.'},
+  {l:'T',e:'🌳',w:'Tree',x:'T is for Tree. The tree gives shade.'},
+  {l:'U',e:'☂️',w:'Umbrella',x:'U is for Umbrella. I use it in the rain.'},
+  {l:'V',e:'🎻',w:'Violin',x:'V is for Violin. The violin makes music.'},
+  {l:'W',e:'🐳',w:'Whale',x:'W is for Whale. The whale lives in the sea.'},
+  {l:'X',e:'📦',w:'Box (x-shape)',x:'X is for boX. A box has an x sound at the end.'},
+  {l:'Y',e:'🟡',w:'Yellow',x:'Y is for Yellow. The sun is yellow.'},
+  {l:'Z',e:'🦓',w:'Zebra',x:'Z is for Zebra. The zebra has stripes.'}
+];
+var abcIndex = 0;
+function renderAbc(){
+  var item = alphabet[abcIndex];
+  document.getElementById('abcLetter').textContent = item.l;
+  document.getElementById('abcEmoji').textContent = item.e;
+  document.getElementById('abcWord').textContent = item.w;
+  document.getElementById('abcExample').textContent = item.x;
+  document.getElementById('abcProgress').textContent = 'Letter ' + (abcIndex+1) + ' of ' + alphabet.length;
+}
+document.getElementById('prevBtn').addEventListener('click', function(){
+  abcIndex = (abcIndex - 1 + alphabet.length) % alphabet.length;
+  renderAbc();
+});
+document.getElementById('nextBtn').addEventListener('click', function(){
+  abcIndex = (abcIndex + 1) % alphabet.length;
+  renderAbc();
+});
+document.getElementById('audioBtn').addEventListener('click', function(){
+  var item = alphabet[abcIndex];
+  if('speechSynthesis' in window){
+    var utter = new SpeechSynthesisUtterance(item.l + '. ' + item.w + '. ' + item.x);
+    utter.rate = 0.85;
+    speechSynthesis.speak(utter);
+  }
+});
+renderAbc();
+</script>
+
+</body>
+</html>
